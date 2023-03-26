@@ -8,7 +8,6 @@ from snake_body import snake
 
 snake_1 = snake()
 
-
 def run(stdscr):
     stdscr.clear()
 
@@ -29,6 +28,7 @@ def run(stdscr):
     pad.refresh(0,0,math.floor((w_values[0]-3)/2)+x,math.floor(w_values[1]/2)+y,math.floor((w_values[0]-3)/2)+x,math.floor(w_values[1]/2)+y)
     pad_2.refresh(0,0,11,1,math.floor((w_values[0]-1)),math.floor(w_values[1]-1))
     turtle_commands = []
+    string_comand = ''
     while True:
         key = screen.getkey()
         try:
@@ -37,6 +37,29 @@ def run(stdscr):
 
             if ord(key) == 8:
                 turtle_commands.pop()
+                pad_2.clear()
+                pad_2.addstr(1,1, "Comando turtle: ")
+                for x_turtle in range(len(turtle_commands)):
+                    pad_2.addstr(1,18 + x_turtle, turtle_commands[x_turtle])
+                pad_2.box('|', '-')
+                pad_2.refresh(0,0,11,1,math.floor((w_values[0]-1)),math.floor(w_values[1]-1))
+            
+            elif ord(key) == 10:
+                string_comand = ''
+                for x_string in turtle_commands:
+                    string_comand+=x_string
+                print(string_comand)
+
+                if string_comand.split(' ')[0] == 'E':
+                    y+=1
+                    pad.refresh(0,0,math.floor((w_values[0]-3)/2)+x,math.floor((w_values[1])/2)+y,math.floor((w_values[0] -3)/2)+x,math.floor(w_values[1]/2)+y)
+                elif string_comand.split(' ')[0] == 'NE':
+                    y+=1
+                    x-=1
+                    pad.refresh(0,0,math.floor((w_values[0]-3)/2)+x,math.floor((w_values[1])/2)+y,math.floor((w_values[0] -3)/2)+x,math.floor(w_values[1]/2)+y)
+
+                    
+                turtle_commands.clear()
                 pad_2.clear()
                 pad_2.addstr(1,1, "Comando turtle: ")
                 for x_turtle in range(len(turtle_commands)):
