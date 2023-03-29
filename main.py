@@ -28,8 +28,11 @@ def run(stdscr):
     pad_2.refresh(0,0,math.floor((w_values[0]-3)),1,math.floor((w_values[0]-1)),math.floor(w_values[1]-1))
     turtle_commands = []
     string_comand = ''
+    previous_direction = ''
+    current_direction = ''
     while True:
         key = screen.getkey()
+        
         try:
             print(key)
             print(ord(key))
@@ -41,7 +44,7 @@ def run(stdscr):
                 for x_turtle in range(len(turtle_commands)):
                     pad_2.addstr(1,18 + x_turtle, turtle_commands[x_turtle])
                 pad_2.box('|', '-')
-                pad_2.refresh(0,0,11,1,math.floor((w_values[0]-1)),math.floor(w_values[1]-1))
+                pad_2.refresh(0,0,math.floor((w_values[0]-3)),1,math.floor((w_values[0]-1)),math.floor(w_values[1]-1))
             
             elif ord(key) == 10:
                 string_comand = ''
@@ -51,10 +54,12 @@ def run(stdscr):
 
                 if string_comand.split(' ')[0] == 'E':
                     y+=1
+                    current_direction = '-'
                     pad.refresh(0,0,math.floor((w_values[0]-3)/2)+x,math.floor((w_values[1])/2)+y,math.floor((w_values[0] -3)/2)+x,math.floor(w_values[1]/2)+y)
                 elif string_comand.split(' ')[0] == 'NE':
                     y+=1
                     x-=1
+                    current_direction = '/'
                     pad.refresh(0,0,math.floor((w_values[0]-3)/2)+x,math.floor((w_values[1])/2)+y,math.floor((w_values[0] -3)/2)+x,math.floor(w_values[1]/2)+y)
 
                     
@@ -80,23 +85,36 @@ def run(stdscr):
 
         if key == 'KEY_A2':
             x-=1
+            current_direction = '|'
         elif key == 'KEY_C2':
             x+=1
+            current_direction = '|'
         elif key == 'KEY_B3':
             y+=1
+            current_direction = '-'
         elif key == 'KEY_B1':
-            y-=1        
+            y-=1 
+            current_direction = '-'      
         screen.clear()
         screen.box('|','-')
         screen.refresh()
         pcx = math.floor((w_values[0]-3)/2)+x
         pcy = math.floor(w_values[1]/2)+y
+        if previous_direction != '':
+            array_saved[-1][2] = current_direction
+        print(array_saved)
         for x2 in array_saved:
             if x2[0] != pcx or x2[1] != pcy:
-                screen.addstr(x2[0], x2[1], '-')
+                screen.addstr(x2[0], x2[1], x2[2])
             else:
                 screen.addstr(x2[0], x2[1], '@')
-        array_saved.append([pcx,pcy])
+        
+        if previous_direction != '':
+            array_saved.append([pcx,pcy, None])
+        else:
+            print(current_direction)
+            array_saved.append([pcx,pcy, current_direction])
+        previous_direction = current_direction
         
         pad.refresh(0,0,math.floor((w_values[0]-3)/2)+x,math.floor((w_values[1])/2)+y,math.floor((w_values[0] -3)/2)+x,math.floor(w_values[1]/2)+y)
         
