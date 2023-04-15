@@ -6,13 +6,36 @@ import curses.textpad as ct
 import re
 
 
+def finish_game(key, curses):
+    if key == "q":
+        curses.endwin()
+        quit()  
 
 
 
 def run(stdscr):
 
+    key=""
     stdscr.clear()
     w_values = stdscr.getmaxyx()
+    
+    menu = curses.newwin(w_values[0]-3,w_values[1],0,0)
+    menu.keypad(True)
+    menu.box('|', '-')
+    title = "Turtle Game"
+    buttonStart = "<S>tart"
+    buttonQuit = "<Q>uit"
+    menu.addstr(math.floor((w_values[0]-10)/2) , math.floor((w_values[1]-len(title))/2), title)
+    menu.addstr(math.floor(((w_values[0]-5)/2)+1) , math.floor((w_values[1]-len(buttonStart))/2), buttonStart)
+    menu.addstr(math.floor(((w_values[0])/2)+2) , math.floor((w_values[1]-len(buttonQuit))/2), buttonQuit)
+    menu.refresh()
+    while key!= "s":
+        key = menu.getkey()
+        if(key == "q"):
+            finish_game(key,curses)
+            
+    stdscr.clear()
+    
     screen = curses.newwin(w_values[0]-3,w_values[1],0,0)
     screen.keypad(True)
     screen.box('|','-')
@@ -31,6 +54,9 @@ def run(stdscr):
     string_comand = ''
     while True:
         key = screen.getkey()
+        
+        if key == "q":
+            finish_game(key, curses)
         
         try:
 
