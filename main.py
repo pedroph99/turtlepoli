@@ -4,14 +4,11 @@ import math
 import time
 import re
 from functions import *
+from templates import *
 
-def finish_game(key, curses):
-    if key == "q":
-        curses.endwin()
-        quit()  
 
 def run(stdscr):
-
+    
     key=""
     stdscr.clear()
     w_values = stdscr.getmaxyx()
@@ -19,13 +16,22 @@ def run(stdscr):
     menu = curses.newwin(w_values[0]-3,w_values[1],0,0)
     menu.keypad(True)
     menu.box('|', '-')
-    title = "Turtle Game"
-    buttonStart = "<S>tart"
-    buttonQuit = "<Q>uit"
-    menu.addstr(math.floor((w_values[0]-10)/2) , math.floor((w_values[1]-len(title))/2), title)
-    menu.addstr(math.floor(((w_values[0]-5)/2)+1) , math.floor((w_values[1]-len(buttonStart))/2), buttonStart)
-    menu.addstr(math.floor(((w_values[0])/2)+2) , math.floor((w_values[1]-len(buttonQuit))/2), buttonQuit)
+    
+    cont = 0
+    for i in title:
+        menu.addstr(math.floor((w_values[0]/2)-len(title) + cont), math.floor((w_values[1]-len(title[cont]))/2), i)
+        cont = cont + 1
+        
+    cont = 1
+    for i in buttons:
+        menu.addstr(math.floor((w_values[0]/2)+(cont*2)) , math.floor((w_values[1]-len(i))/2), i, curses.A_REVERSE)
+        cont = cont + 1
+        #menu.addstr(math.floor((w_values[0]/2)+4) , math.floor((w_values[1]-len(buttons[1]))/2), buttons[1])
+        #menu.addstr(math.floor((w_values[0]/2)+6) , math.floor((w_values[1]-len(buttons[2]))/2), buttons[2])
+        
     menu.refresh()
+    
+    
     while key!= "s":
         key = menu.getkey()
         if(key == "q"):
