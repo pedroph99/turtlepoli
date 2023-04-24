@@ -109,7 +109,7 @@ def run(stdscr):
                         print(string_comand.split(' ')[1])
                         for x_times in range(int(string_comand.split(' ')[1])):
                             y-=1
-                            x+=1
+                            x-=1
                             x = verify_x(w_values, x)
                             y = verify_y(w_values, y)
                             draw_directions(screen, w_values, array_saved, pad, x, y, desenhar)

@@ -25,10 +25,10 @@ def refresh_main_screen(screen):
     screen.refresh()
 
 def verify_x(w_values, x):
-    if math.floor(w_values[0]/2)+x<=1:
+    if math.floor(w_values[0]/2)+x<=2:
         return math.floor(w_values[0]/2)-3
-    elif math.floor(w_values[0]/2)+x == w_values[0]-3:
-        return -(math.floor(w_values[0]/2)-2)
+    elif math.floor(w_values[0]/2)+x == w_values[0]-2:
+        return -(math.floor(w_values[0]/2)-3)
     else:
         return x
     
