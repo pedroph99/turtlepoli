@@ -83,3 +83,19 @@ def desenha_dd(desenhar, pad, max_coord):
         desenha_tela(pad,1,max_coord[1]-10,"DRAWING")
     else:
         desenha_tela(pad,1,max_coord[1]-10,"DRAWING*")
+        
+def draw_instructions(w_values, curses, menu, stdscr):
+    menu.box('|', '-')
+    menu.addstr(3, 7, "<B>ack", curses.A_UNDERLINE)
+    menu.addstr(5, math.floor((w_values[1]/2)-len("Instruções")), "Instruções", curses.A_UNDERLINE)
+    menu.refresh()
+    
+    key = ""
+    
+    while key != "b":
+        key = menu.getkey()
+        if key == "q":
+            finish_game(curses)
+    menu.addstr(3, 7, "<B>ack", curses.A_REVERSE)
+    menu.refresh()
+    stdscr.clear()

@@ -25,28 +25,26 @@ def run(stdscr):
         
         cont = 1
         for i in buttons:
-            menu.addstr(math.floor((w_values[0]/2)+(cont*2)) , math.floor((w_values[1]-len(i))/2), i, curses.A_REVERSE)
+            menu.addstr(math.floor((w_values[0]/2)+(cont*2)) , math.floor((w_values[1]-len(i))/2), i, curses.A_UNDERLINE)
             cont = cont + 1
         
         menu.refresh()
         key = menu.getkey()
         
         if(key == "q"):
+            menu.addstr(math.floor((w_values[0]/2)+(cont+2)) , math.floor((w_values[1]-len(buttons[2]))/2), buttons[2], curses.A_REVERSE)
+            menu.refresh()
             finish_game(curses)
             
         elif(key == "i"):
-            stdscr.clear()
-            
-            menu.box('|', '-')
-            menu.addstr(20, 20, "Instruções")
+            menu.addstr(math.floor((w_values[0]/2)+(cont)) , math.floor((w_values[1]-len(buttons[1]))/2), buttons[1], curses.A_REVERSE)
             menu.refresh()
+            menu.clear()
             
-            while key != "b":
-                key = menu.getkey()
-                if key == "q":
-                    finish_game()
-            stdscr.clear()
-    
+            draw_instructions(w_values, curses, menu, stdscr)
+            
+    menu.addstr(math.floor((w_values[0]/2)+(cont-2)) , math.floor((w_values[1]-len(buttons[0]))/2), buttons[0], curses.A_REVERSE)
+    menu.refresh()
             
     stdscr.clear()
     
