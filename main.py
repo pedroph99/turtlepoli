@@ -13,29 +13,40 @@ def run(stdscr):
     stdscr.clear()
     w_values = stdscr.getmaxyx()
     
-    menu = curses.newwin(w_values[0]-3,w_values[1],0,0)
-    menu.keypad(True)
-    menu.box('|', '-')
-    
-    cont = 0
-    for i in title:
-        menu.addstr(math.floor((w_values[0]/2)-len(title) + cont), math.floor((w_values[1]-len(title[cont]))/2), i)
-        cont = cont + 1
-        
-    cont = 1
-    for i in buttons:
-        menu.addstr(math.floor((w_values[0]/2)+(cont*2)) , math.floor((w_values[1]-len(i))/2), i, curses.A_REVERSE)
-        cont = cont + 1
-        #menu.addstr(math.floor((w_values[0]/2)+4) , math.floor((w_values[1]-len(buttons[1]))/2), buttons[1])
-        #menu.addstr(math.floor((w_values[0]/2)+6) , math.floor((w_values[1]-len(buttons[2]))/2), buttons[2])
-        
-    menu.refresh()
-    
-    
     while key!= "s":
+        menu = curses.newwin(w_values[0]-3,w_values[1],0,0)
+        menu.keypad(True)
+        menu.box('|', '-')
+    
+        cont = 0
+        for i in title:
+            menu.addstr(math.floor((w_values[0]/2)-len(title) + cont), math.floor((w_values[1]-len(title[cont]))/2), i)
+            cont = cont + 1
+        
+        cont = 1
+        for i in buttons:
+            menu.addstr(math.floor((w_values[0]/2)+(cont*2)) , math.floor((w_values[1]-len(i))/2), i, curses.A_REVERSE)
+            cont = cont + 1
+        
+        menu.refresh()
         key = menu.getkey()
+        
         if(key == "q"):
-            finish_game(key,curses)
+            finish_game(curses)
+            
+        elif(key == "i"):
+            stdscr.clear()
+            
+            menu.box('|', '-')
+            menu.addstr(20, 20, "Instruções")
+            menu.refresh()
+            
+            while key != "b":
+                key = menu.getkey()
+                if key == "q":
+                    finish_game()
+            stdscr.clear()
+    
             
     stdscr.clear()
     
@@ -59,7 +70,7 @@ def run(stdscr):
         key = screen.getkey()
         
         if key == "q":
-            finish_game(key, curses)
+            finish_game(curses)
         
         try:
 
@@ -91,7 +102,7 @@ def run(stdscr):
                         print(string_comand.split(' ')[1])
                         for x_times in range(int(string_comand.split(' ')[1])):
                             y-=1
-                            x-=1
+                            x+=1
                             x = verify_x(w_values, x)
                             y = verify_y(w_values, y)
                             draw_directions(screen, w_values, array_saved, pad, x, y)

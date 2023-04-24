@@ -66,7 +66,6 @@ def draw_directions(screen, w_values, array_saved, pad, x, y):
                             
     time.sleep(0.25)
     
-def finish_game(key, curses):
-    if key == "q":
-        curses.endwin()
-        quit() 
+def finish_game(curses):
+    curses.endwin()
+    quit() 
