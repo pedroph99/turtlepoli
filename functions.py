@@ -11,8 +11,8 @@ def refresh_pad2(pad_2,w_values):
     pad_2.refresh(0,0,math.floor((w_values[0]-3)),0,math.floor((w_values[0]-1)),math.floor(w_values[1]-1))
 
 
-def desenha_tela(tela, x,y, simbolo, color):
-    tela.addstr(x,y,simbolo, color)
+def desenha_tela(tela, x,y, simbolo):
+    tela.addstr(x,y,simbolo)
 
 
 def refresh_pad(pad, w_values, x,y):
@@ -78,11 +78,11 @@ def desenho(desenhar):
     else:
         return True
     
-def desenha_dd(desenhar, pad, max_coord, curses):
+def desenha_dd(desenhar, pad, max_coord):
     if desenhar:
-        desenha_tela(pad,1,max_coord[1]-10,"DRAWING", curses.color_pair(1))
+        desenha_tela(pad,1,max_coord[1]-10,"DRAWING")
     else:
-        desenha_tela(pad,1,max_coord[1]-10,"DRAWING*", curses.color_pair(1))
+        desenha_tela(pad,1,max_coord[1]-10,"DRAWING*")
         
 def draw_instructions(w_values, curses, menu, stdscr):
     menu.box('|', '-')

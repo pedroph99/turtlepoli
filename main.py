@@ -62,9 +62,9 @@ def run(stdscr):
     pad_2.box('|', '-')
     screen.refresh()
     desenhar = True
-    desenha_tela(pad, 0,0, "@", curses.color_pair(2))
-    desenha_tela(pad_2,1,1,"Comando turtle: ", curses.color_pair(1))
-    desenha_dd(desenhar, pad_2, w_values, curses)
+    desenha_tela(pad, 0,0, "@")
+    desenha_tela(pad_2,1,1,"Comando turtle: ")
+    desenha_dd(desenhar, pad_2, w_values)
     x = 0
     y = 0
     array_saved = []
@@ -83,10 +83,10 @@ def run(stdscr):
             if ord(key) == 8:
                 turtle_commands.pop()
                 pad_2.clear()
-                desenha_tela(pad_2, 1,1, 'Comando turtle', curses.color_pair(1))
-                desenha_dd(desenhar, pad_2, w_values, curses)
+                desenha_tela(pad_2, 1,1, 'Comando turtle')
+                desenha_dd(desenhar, pad_2, w_values)
                 for x_turtle in range(len(turtle_commands)):
-                    desenha_tela(pad_2, 1,18+x_turtle,  turtle_commands[x_turtle], curses.color_pair(1))
+                    desenha_tela(pad_2, 1,18+x_turtle,  turtle_commands[x_turtle])
                 pad_2.box('|', '-')
                 refresh_pad2(pad_2, w_values)
             
@@ -160,27 +160,27 @@ def run(stdscr):
                     
                 turtle_commands.clear()
                 pad_2.clear()
-                desenha_tela(pad_2, 1,1, "Comando turtle: ", curses.color_pair(1))
-                desenha_dd(desenhar, pad_2, w_values, curses)
+                desenha_tela(pad_2, 1,1, "Comando turtle: ")
+                desenha_dd(desenhar, pad_2, w_values)
                 for x_turtle in range(len(turtle_commands)):
                     pad_2.addstr(1,18 + x_turtle, turtle_commands[x_turtle])
                 pad_2.box('|', '-')
                 refresh_pad2(pad_2, w_values)
 
             elif (ord(key)>=65 and ord(key)<=90) or (ord(key)>=48 and ord(key)<=57):
-                desenha_tela(pad_2, 1,18+len(turtle_commands), key, curses.color_pair(1))
+                desenha_tela(pad_2, 1,18+len(turtle_commands), key)
                 turtle_commands.append(key)
                 refresh_pad2(pad_2, w_values)
             elif ord(key) == 32:
-                desenha_tela(pad_2, 1,18+len(turtle_commands), key, curses.color_pair(1))
+                desenha_tela(pad_2, 1,18+len(turtle_commands), key)
                 turtle_commands.append(' ')
                 refresh_pad2(pad_2, w_values)
             elif ord(key) == 100:
                 desenhar = desenho(desenhar)
                 pad_2.clear()
                 pad_2.box('|', '-')
-                desenha_tela(pad_2, 1,1, "Comando turtle: ", curses.color_pair(1))
-                desenha_dd(desenhar, pad_2, w_values, curses)
+                desenha_tela(pad_2, 1,1, "Comando turtle: ")
+                desenha_dd(desenhar, pad_2, w_values)
                 refresh_pad2(pad_2, w_values)
                 
 
@@ -206,16 +206,16 @@ def run(stdscr):
         print(array_saved)
         for x2 in array_saved:
             if x2[0] != pcx or x2[1] != pcy:
-                desenha_tela(screen, x2[0], x2[1], '*', curses.color_pair(3))
+                desenha_tela(screen, x2[0], x2[1], '*')
             else:
-                desenha_tela(screen, x2[0], x2[1], '@', curses.color_pair(2))
+                desenha_tela(screen, x2[0], x2[1], '@')
         if desenhar:
             if [math.floor((w_values[0]-3)/2), math.floor(w_values[1]/2)] not in array_saved:
                 array_saved.append([math.floor((w_values[0]-3)/2), math.floor(w_values[1]/2)])
             if [pcx, pcy] not in array_saved:
                 array_saved.append([pcx,pcy ])
             
-        desenha_tela(screen, pcx,pcy, '@', curses.color_pair(2))
+        desenha_tela(screen, pcx,pcy, '@')
         refresh_tela(pad, w_values, x, y)
 
 curses.wrapper(run)
