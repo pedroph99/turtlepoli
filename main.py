@@ -57,8 +57,10 @@ def run(stdscr):
     pad_2 = curses.newpad(w_values[0] -(w_values[0]-3), w_values[1]-1)
     pad_2.box('|', '-')
     screen.refresh()
+    desenhar = True
     desenha_tela(pad, 0,0, "@")
     desenha_tela(pad_2,1,1,"Comando turtle: ")
+    desenha_dd(desenhar, pad_2, w_values)
     x = 0
     y = 0
     array_saved = []
@@ -78,6 +80,7 @@ def run(stdscr):
                 turtle_commands.pop()
                 pad_2.clear()
                 desenha_tela(pad_2, 1,1, 'Comando turtle')
+                desenha_dd(desenhar, pad_2, w_values)
                 for x_turtle in range(len(turtle_commands)):
                     desenha_tela(pad_2, 1,18+x_turtle,  turtle_commands[x_turtle])
                 pad_2.box('|', '-')
@@ -97,7 +100,7 @@ def run(stdscr):
                             x-=1
                             x = verify_x(w_values, x)
                             y = verify_y(w_values, y)
-                            draw_directions(screen, w_values, array_saved, pad, x, y)
+                            draw_directions(screen, w_values, array_saved, pad, x, y, desenhar)
                     elif string_comand.split(' ')[0] == 'NO':
                         print(string_comand.split(' ')[1])
                         for x_times in range(int(string_comand.split(' ')[1])):
@@ -105,7 +108,7 @@ def run(stdscr):
                             x+=1
                             x = verify_x(w_values, x)
                             y = verify_y(w_values, y)
-                            draw_directions(screen, w_values, array_saved, pad, x, y)
+                            draw_directions(screen, w_values, array_saved, pad, x, y, desenhar)
 
                     elif string_comand.split(' ')[0] == 'N':
                         print(string_comand.split(' ')[1])
@@ -113,19 +116,19 @@ def run(stdscr):
                             x-=1
                             x = verify_x(w_values, x)
 
-                            draw_directions(screen, w_values, array_saved, pad, x, y)
+                            draw_directions(screen, w_values, array_saved, pad, x, y, desenhar)
                     elif string_comand.split(' ')[0] == 'S':
                         for x_times in range(int(string_comand.split(' ')[1])):
                             x+=1
                             x = verify_x(w_values, x)
-                            draw_directions(screen, w_values, array_saved, pad, x, y)
+                            draw_directions(screen, w_values, array_saved, pad, x, y, desenhar)
                     elif string_comand.split(' ')[0] == 'SL':
                         for x_times in range(int(string_comand.split(' ')[1])):
                             x+=1
                             y+=1
                             x = verify_x(w_values, x)
                             y =  verify_y(w_values, y)
-                            draw_directions(screen, w_values, array_saved, pad, x, y)
+                            draw_directions(screen, w_values, array_saved, pad, x, y, desenhar)
                     elif string_comand.split(' ')[0] == 'SO':
                         print(string_comand.split(' ')[1])
                         for x_times in range(int(string_comand.split(' ')[1])):
@@ -133,27 +136,28 @@ def run(stdscr):
                             x+=1
                             x = verify_x(w_values, x)
                             y = verify_y(w_values, y)
-                            draw_directions(screen, w_values, array_saved, pad, x, y)
+                            draw_directions(screen, w_values, array_saved, pad, x, y, desenhar)
                     
                     elif string_comand.split(' ')[0] == 'O':
                         print(string_comand.split(' ')[1])
                         for x_times in range(int(string_comand.split(' ')[1])):
                             y-=1
                             y = verify_y(w_values, y)
-                            draw_directions(screen, w_values, array_saved, pad, x, y)
+                            draw_directions(screen, w_values, array_saved, pad, x, y, desenhar)
                     
                     elif string_comand.split(' ')[0] == 'L':
                         print(string_comand.split(' ')[1])
                         for x_times in range(int(string_comand.split(' ')[1])):
                             y+=1
                             y = verify_y(w_values, y)
-                            draw_directions(screen, w_values, array_saved, pad, x, y)
+                            draw_directions(screen, w_values, array_saved, pad, x, y, desenhar)
                             
                     
                     
                 turtle_commands.clear()
                 pad_2.clear()
                 desenha_tela(pad_2, 1,1, "Comando turtle: ")
+                desenha_dd(desenhar, pad_2, w_values)
                 for x_turtle in range(len(turtle_commands)):
                     pad_2.addstr(1,18 + x_turtle, turtle_commands[x_turtle])
                 pad_2.box('|', '-')
@@ -167,6 +171,15 @@ def run(stdscr):
                 desenha_tela(pad_2, 1,18+len(turtle_commands), key)
                 turtle_commands.append(' ')
                 refresh_pad2(pad_2, w_values)
+            elif ord(key) == 100:
+                desenhar = desenho(desenhar)
+                pad_2.clear()
+                pad_2.box('|', '-')
+                desenha_tela(pad_2, 1,1, "Comando turtle: ")
+                desenha_dd(desenhar, pad_2, w_values)
+                refresh_pad2(pad_2, w_values)
+                
+
 
         except:
             pass
@@ -192,12 +205,12 @@ def run(stdscr):
                 desenha_tela(screen, x2[0], x2[1], '*')
             else:
                 desenha_tela(screen, x2[0], x2[1], '@')
-        
-        if [math.floor((w_values[0]-3)/2), math.floor(w_values[1]/2)] not in array_saved:
-            array_saved.append([math.floor((w_values[0]-3)/2), math.floor(w_values[1]/2)])
-        if [pcx, pcy] not in array_saved:
-            array_saved.append([pcx,pcy ])
-        
+        if desenhar:
+            if [math.floor((w_values[0]-3)/2), math.floor(w_values[1]/2)] not in array_saved:
+                array_saved.append([math.floor((w_values[0]-3)/2), math.floor(w_values[1]/2)])
+            if [pcx, pcy] not in array_saved:
+                array_saved.append([pcx,pcy ])
+            
         desenha_tela(screen, pcx,pcy, '@')
         refresh_tela(pad, w_values, x, y)
 

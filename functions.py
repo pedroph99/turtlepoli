@@ -45,7 +45,7 @@ def verify_y(w_values, y):
     else:
         return y
 
-def draw_directions(screen, w_values, array_saved, pad, x, y):
+def draw_directions(screen, w_values, array_saved, pad, x, y, desenhar):
     screen.clear()
     screen.box('|','-')
                             
@@ -59,7 +59,9 @@ def draw_directions(screen, w_values, array_saved, pad, x, y):
             desenha_tela(screen, x2[0], x2[1], '@')
                             
     if [pcx, pcy] not in array_saved:
-        array_saved.append([pcx,pcy ])
+        if desenhar:
+            print('ok')
+            array_saved.append([pcx,pcy ])
                             
     screen.refresh()
     refresh_pad(pad, w_values, x,y)
@@ -67,5 +69,17 @@ def draw_directions(screen, w_values, array_saved, pad, x, y):
     time.sleep(0.25)
     
 def finish_game(curses):
-    curses.endwin()
-    quit() 
+        curses.endwin()
+        quit() 
+
+def desenho(desenhar):
+    if desenhar:
+        return False
+    else:
+        return True
+    
+def desenha_dd(desenhar, pad, max_coord):
+    if desenhar:
+        desenha_tela(pad,1,max_coord[1]-10,"DRAWING")
+    else:
+        desenha_tela(pad,1,max_coord[1]-10,"DRAWING*")
