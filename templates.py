@@ -13,3 +13,23 @@ rosa_dos_ventos = ["      N      ",
                    "      S      "]
 
 buttons = ["<S>tart", "<I>structions", "<Q>uit"]
+
+instruction1 = ["Utilize as setas "
+                " \"  ⬅  ⬆  ➡  ⬇  \"",
+               "para se movimentar",
+               "                   ",
+               "                   ",
+               "Pressione \"q\" a qualquer momento para sair",
+               "                                            ",
+               "                                            ",
+               "Pressione \"d\" para que a tartaruga ande SEM desenhar.",
+               "Para que ela volte a desenhar, só é preciso pressionar ",
+               " \"d\" novamente."]
+
+instruction2 = ["Ao pressionar \"Caps Lock\", você podera digitar   ",
+                "uma direção e a quantidade de casas que a tartaruga", 
+                "deve andar."                                        ,
+                "                                                   ",
+                "O comando das direções deve seguir as direções     ",
+                "presentes na Rosa dos Ventos a seguir:              "]
+

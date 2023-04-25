@@ -1,6 +1,7 @@
 
 import math
 import time
+from templates import *
 # Funções auxiliares ao código main.
 
 def refresh_tela(pad,w_values,x,y):
@@ -88,6 +89,22 @@ def draw_instructions(w_values, curses, menu, stdscr):
     menu.box('|', '-')
     menu.addstr(3, 7, "<B>ack", curses.A_UNDERLINE)
     menu.addstr(5, math.floor((w_values[1]/2)-len("Instruções")), "Instruções", curses.A_UNDERLINE)
+    
+    cont = 0
+    for i in instruction1:
+        menu.addstr(math.floor((w_values[0]/2)-len(instruction1) + cont+ 3), math.floor((w_values[1]-len(instruction1[cont]))/8), i, curses.color_pair(2))
+        cont = cont + 1
+        
+    cont = 0
+    for i in instruction2:
+        menu.addstr(math.floor((w_values[0]/2)-len(instruction2) + cont+ 3), math.floor((w_values[1]-len(instruction2[cont]))*4/8), i, curses.color_pair(2))
+        cont = cont + 1
+        
+    cont = 0
+    for i in rosa_dos_ventos:
+        menu.addstr(math.floor((w_values[0]/2)-len(rosa_dos_ventos) + cont+ 3), math.floor((w_values[1]-len(rosa_dos_ventos[cont]))*6/8), i, curses.color_pair(2))
+        cont = cont + 1
+    
     menu.refresh()
     
     key = ""
