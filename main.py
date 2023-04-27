@@ -12,8 +12,7 @@ def run(stdscr):
     curses.start_color()
     curses.init_pair(1, curses.COLOR_WHITE, curses.COLOR_BLACK)
     curses.init_pair(2, curses.COLOR_GREEN, curses.COLOR_BLACK)
-    curses.init_pair(3, curses.COLOR_BLUE, curses.COLOR_BLACK)
-    curses.init_pair(4, curses.COLOR_CYAN, 230)
+    curses.curs_set(False)
     
     key=""
     stdscr.clear()
@@ -94,7 +93,7 @@ def run(stdscr):
                 string_comand = ''
                 for x_string in turtle_commands:
                     string_comand+=x_string
-                if re.fullmatch((r"(NE|NO|N|SO|SL|S|O|E|L)\s*[0-9]*"), string_comand):
+                if re.fullmatch((r"(NE|NO|N|SO|SE|S|O|E)\s*[0-9]*"), string_comand):
                     print(string_comand.split(' ')[1])
                     
                     if string_comand.split(' ')[0] == 'NE':
@@ -126,7 +125,7 @@ def run(stdscr):
                             x+=1
                             x = verify_x(w_values, x)
                             draw_directions(screen, w_values, array_saved, pad, x, y, desenhar)
-                    elif string_comand.split(' ')[0] == 'SL':
+                    elif string_comand.split(' ')[0] == 'SE':
                         for x_times in range(int(string_comand.split(' ')[1])):
                             x+=1
                             y+=1
@@ -149,7 +148,7 @@ def run(stdscr):
                             y = verify_y(w_values, y)
                             draw_directions(screen, w_values, array_saved, pad, x, y, desenhar)
                     
-                    elif string_comand.split(' ')[0] == 'L':
+                    elif string_comand.split(' ')[0] == 'E':
                         print(string_comand.split(' ')[1])
                         for x_times in range(int(string_comand.split(' ')[1])):
                             y+=1

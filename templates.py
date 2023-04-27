@@ -3,8 +3,7 @@ title = [" _________ ___   ___ ________  _________ ____      _________      ____
          "    | |    | |   | | |  |__| |    | |    |  |      |  |___        |  |__|  |  /  /@ @ @\  \  |  |      |  | ",
          "    | |    | |   | | |  __ _/     | |    |  |      |  ____|       |  _____/  /_/|@ @ @ @|\_\ |  |      |  | ",
          "    | |    | |___| | |  | \ \     | |    |  |____  |  |____       |  |          _\@_@_@/_    |  |____  |  | ",
-         "    |_|     \_____/  |__|  \_\    |_|    |_______| |_______|      |__|         /_/  V  \_\   |_______| |__| ",
-         "                                                                                                            "]
+         "    |_|     \_____/  |__|  \_\    |_|    |_______| |_______|      |__|         /_/  V  \_\   |_______| |__| "]
 
 rosa_dos_ventos = ["      N      ",
                    "  NO /|\ NE  ",
@@ -24,7 +23,7 @@ instruction1 = ["Utilize as setas "
                "                                            ",
                "Pressione \"d\" para que a tartaruga ande SEM desenhar.",
                "Para que ela volte a desenhar, só é preciso pressionar ",
-               " \"d\" novamente."]
+               " \"d\" novamente.                                      "]
 
 instruction2 = ["Ao pressionar \"Caps Lock\", você podera digitar   ",
                 "uma direção e a quantidade de casas que a tartaruga", 

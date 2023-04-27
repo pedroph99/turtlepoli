@@ -92,7 +92,7 @@ def draw_instructions(w_values, curses, menu, stdscr):
     
     cont = 0
     for i in instruction1:
-        menu.addstr(math.floor((w_values[0]/2)-len(instruction1) + cont+ 3), math.floor((w_values[1]-len(instruction1[cont]))/8), i, curses.color_pair(2))
+        menu.addstr(math.floor((w_values[0]/2)-len(instruction1) + cont+ 7), math.floor((w_values[1]-len(instruction1[cont]))/8), i, curses.color_pair(2))
         cont = cont + 1
         
     cont = 0
